@@ -32,6 +32,10 @@ import './index.scss';
 registerIcons();
 
 const MainApp = () => (
+  <>
+  <a href="/">
+    <img src={getConfig().LOGO_URL} alt="Logo" className="logo" />
+  </a>
   <AppProvider store={configureStore()}>
     <Helmet>
       <link rel="shortcut icon" href={getConfig().FAVICON_URL} type="image/x-icon" />
@@ -58,6 +62,7 @@ const MainApp = () => (
       <Route path="*" element={<Navigate replace to={PAGE_NOT_FOUND} />} />
     </Routes>
   </AppProvider>
+  </>
 );
 
 export default MainApp;

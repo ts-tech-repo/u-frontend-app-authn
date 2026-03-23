@@ -17,7 +17,7 @@ const BaseContainer = ({ children, showWelcomeBanner, fullName }) => {
 
   if (enableImageLayout) {
     return (
-      <div className="layout">
+      <div className="layout" style={{ backgroundImage: `url(${getConfig().LOGIN_PAGE_BANNER})` }}>
         <MediaQuery maxWidth={breakpoints.extraSmall.maxWidth - 1}>
           {showWelcomeBanner ? <AuthSmallLayout fullName={fullName} /> : <ImageExtraSmallLayout />}
         </MediaQuery>
@@ -40,7 +40,7 @@ const BaseContainer = ({ children, showWelcomeBanner, fullName }) => {
   return (
     <>
       <div className="col-md-12 extra-large-screen-top-stripe" />
-      <div className="layout">
+      <div className="layout" style={{ backgroundImage: `url(${getConfig().LOGIN_PAGE_BANNER})` }}>
         <MediaQuery maxWidth={breakpoints.small.maxWidth - 1}>
           {showWelcomeBanner ? <AuthSmallLayout fullName={fullName} /> : <DefaultSmallLayout />}
         </MediaQuery>

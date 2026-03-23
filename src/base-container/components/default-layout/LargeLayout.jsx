@@ -24,10 +24,14 @@ const LargeLayout = () => {
               { 'ml-6': getConfig().SITE_NAME !== 'edX' },
             )}
           >
-            {formatMessage(messages['start.learning'])}
-            <div className="text-accent-a">
-              {formatMessage(messages['with.site.name'], { siteName: getConfig().SITE_NAME })}
-            </div>
+            {getConfig().SITE_TITLE ? getConfig().SITE_TITLE : 'Welcome to your program!'}
+             <div
+                className="text-accent-a"
+                dangerouslySetInnerHTML={{
+                  __html: getConfig().SITE_SUB_TITLE
+                }}
+              />
+            {getConfig().SITE_NAME == "CMU" && <p className='poweredby'>Powered by TalentSprint</p>}
           </h1>
         </div>
       </div>
