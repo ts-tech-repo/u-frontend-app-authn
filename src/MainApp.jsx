@@ -31,6 +31,8 @@ import './index.scss';
 
 registerIcons();
 
+console.log('Config', getConfig());
+
 const MainApp = () => (
   <>
   <a href="/">
