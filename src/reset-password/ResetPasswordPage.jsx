@@ -231,10 +231,10 @@ const ResetPasswordPage = (props) => {
                 <ul className="password-requirements text-muted" style={{ fontSize: '0.875rem' }}>
                     <li>Should contain at least three of the four categories: lowercase, uppercase, numeric, and special characters.</li>
                     <li>Your password must contain at least 4 unique characters.</li>
-                    <li>Must not contain common dictionary words.</li>
+                    {/* <li>Must not contain common dictionary words.</li> */}
                     <li>Must not contain personal info.</li>
                     <li>Must not contain any character more than 4 times.</li>
-                    <li>Must not include keyboard patterns of more than three (3) characters.</li>
+                    {/* <li>Must not include keyboard patterns of more than three (3) characters.</li> */}
                 </ul>
               </Form>
             </div>
