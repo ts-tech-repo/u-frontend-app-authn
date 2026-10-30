@@ -53,6 +53,7 @@
     "react-dom": "^18.3.1",
     "react-helmet": "6.1.0",
     "react-loading-skeleton": "3.5.0",
+    "react-password-checklist": "^1.8.1",
     "react-redux": "7.2.9",
     "react-responsive": "8.2.0",
     "react-router": "6.30.1",

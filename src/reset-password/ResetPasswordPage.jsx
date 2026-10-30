@@ -30,15 +30,20 @@ import {
   LETTER_REGEX, LOGIN_PAGE, NUMBER_REGEX, RESET_PAGE,
 } from '../data/constants';
 import { getAllPossibleQueryParams, updatePathWithQueryParams, windowScrollTo } from '../data/utils';
+import PasswordChecklist from 'react-password-checklist';
+
 
 const ResetPasswordPage = (props) => {
   const { formatMessage } = useIntl();
   const newPasswordError = formatMessage(messages['password.validation.message']);
 
   const [newPassword, setNewPassword] = useState('');
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [formErrors, setFormErrors] = useState({});
   const [errorCode, setErrorCode] = useState(null);
+  const [prevPasswordOnSubmit, setPrevPasswordOnSubmit] = useState('');
+  const [prevConfirmPasswordOnSubmit, setPrevConfirmPasswordOnSubmit] = useState('');
   const { token } = useParams();
   const navigate = useNavigate();
 
@@ -66,18 +71,22 @@ const ResetPasswordPage = (props) => {
   };
 
   const validateInput = (name, value) => {
+    const trimmedValue = value.trim();
     switch (name) {
       case 'newPassword':
-        if (!value || !LETTER_REGEX.test(value) || !NUMBER_REGEX.test(value) || value.length < 8) {
+        if(!trimmedValue) {
+          formErrors.newPassword = formatMessage(messages['password.required.mesaage']);
+        }
+        else if (!isPasswordValid) {
           formErrors.newPassword = formatMessage(messages['password.validation.message']);
         } else {
           validatePasswordFromBackend(value);
         }
         break;
       case 'confirmPassword':
-        if (!value) {
+        if (!trimmedValue) {
           formErrors.confirmPassword = formatMessage(messages['confirm.your.password']);
-        } else if (value !== newPassword) {
+        } else if (trimmedValue !== newPassword) {
           formErrors.confirmPassword = formatMessage(messages['passwords.do.not.match']);
         } else {
           formErrors.confirmPassword = '';
@@ -92,14 +101,12 @@ const ResetPasswordPage = (props) => {
 
   const handleOnBlur = (event) => {
     const { name, value } = event.target;
-    validateInput(name, value);
   };
 
   const handleConfirmPasswordChange = (e) => {
     const { value } = e.target;
 
     setConfirmPassword(value);
-    validateInput('confirmPassword', value);
   };
 
   const handleOnFocus = (e) => {
@@ -109,6 +116,19 @@ const ResetPasswordPage = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Skip re-validation if the values haven't changed
+    if (
+        formErrors.newPassword &&
+        newPassword === prevPasswordOnSubmit &&
+        confirmPassword === prevConfirmPasswordOnSubmit
+      ) {
+      return;
+    }
+
+    // Update the previous values
+    setPrevPasswordOnSubmit(newPassword);
+    setPrevConfirmPasswordOnSubmit(confirmPassword);
+    
     const isPasswordValid = validateInput('newPassword', newPassword);
     const isPasswordConfirmed = validateInput('confirmPassword', confirmPassword);
 
@@ -176,6 +196,20 @@ const ResetPasswordPage = (props) => {
                   errorMessage={formErrors.confirmPassword}
                   showRequirements={false}
                   floatingLabel={formatMessage(messages['confirm.password.label'])}
+                />          
+                <PasswordChecklist
+                  rules={[
+                    "notEmpty",
+                    "match",
+                  ]}
+                  minLength={8}
+                  value={newPassword}
+                  valueAgain={confirmPassword}
+                  messages={{
+                    notEmpty: "Password cannot be empty",
+                    match: "Passwords must match",
+                  }}
+                  onChange={(isValid) => setIsPasswordValid(isValid)}
                 />
                 <StatefulButton
                   id="submit-new-password"
@@ -191,6 +225,17 @@ const ResetPasswordPage = (props) => {
                   onClick={e => handleSubmit(e)}
                   onMouseDown={(e) => e.preventDefault()}
                 />
+                <p className="password-requirements mt-3 mb-0 p-0 text-muted" style={{ fontSize: '0.875rem' }}>
+                  <strong>Password Requirements:</strong>
+                </p>
+                <ul className="password-requirements text-muted" style={{ fontSize: '0.875rem' }}>
+                    <li>Should contain at least three of the four categories: lowercase, uppercase, numeric, and special characters.</li>
+                    <li>Your password must contain at least 4 unique characters.</li>
+                    <li>Must not contain common dictionary words.</li>
+                    <li>Must not contain personal info.</li>
+                    <li>Must not contain any character more than 4 times.</li>
+                    <li>Must not include keyboard patterns of more than three (3) characters.</li>
+                </ul>
               </Form>
             </div>
           </div>
