@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 import { getConfig } from "@edx/frontend-platform";
 import { useIntl } from "@edx/frontend-platform/i18n";
-import { Form, Icon, Spinner, StatefulButton, Tab, Tabs } from "ts-paragon";
-import { ChevronLeft } from "ts-paragon/icons";
+import { Form, Icon, Spinner, StatefulButton, Tab, Tabs } from "@openedx/paragon";
+import { ChevronLeft } from "@openedx/paragon/icons";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { useNavigate, useParams } from "react-router-dom";
