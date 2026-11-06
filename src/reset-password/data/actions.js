@@ -19,9 +19,9 @@ export const validateTokenBegin = () => ({
   type: VALIDATE_TOKEN.BEGIN,
 });
 
-export const validateTokenSuccess = (tokenStatus, token) => ({
+export const validateTokenSuccess = (tokenStatus, token, tokenResponse) => ({
   type: VALIDATE_TOKEN.SUCCESS,
-  payload: { tokenStatus, token },
+  payload: { tokenStatus, token, tokenResponse },
 });
 
 export const validateTokenFailure = errorCode => ({

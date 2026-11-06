@@ -5,6 +5,7 @@ export const defaultState = {
   status: TOKEN_STATE.PENDING,
   token: null,
   errorMsg: null,
+  tokenValidationResponse: null,
 };
 
 const reducer = (state = defaultState, action = null) => {
@@ -14,6 +15,7 @@ const reducer = (state = defaultState, action = null) => {
         ...state,
         status: TOKEN_STATE.VALID,
         token: action.payload.token,
+        tokenValidationResponse: action.payload.tokenResponse
       };
     case PASSWORD_RESET_FAILURE:
       return {

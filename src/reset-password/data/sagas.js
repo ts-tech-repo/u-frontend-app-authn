@@ -21,7 +21,7 @@ export function* handleValidateToken(action) {
     const data = yield call(validateToken, action.payload.token);
     const isValid = data.is_valid;
     if (isValid) {
-      yield put(validateTokenSuccess(isValid, action.payload.token));
+      yield put(validateTokenSuccess(isValid, action.payload.token, data));
     } else {
       yield put(passwordResetFailure(PASSWORD_RESET.INVALID_TOKEN));
     }

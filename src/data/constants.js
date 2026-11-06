@@ -37,3 +37,5 @@ export const VALID_EMAIL_REGEX = '(^[-!#$%&\'*+/=?^_`{}|~0-9A-Z]+(\\.[-!#$%&\'*+
 // things like auto-enrollment upon login and registration.
 export const AUTH_PARAMS = ['course_id', 'enrollment_action', 'course_mode', 'email_opt_in', 'purchase_workflow', 'next', 'register_for_free', 'track', 'is_account_recovery', 'variant', 'host', 'cta'];
 export const REDIRECT = 'redirect';
+export const KEYBOARD_ROWS = ["qwertyuiop", "asdfghjkl", "zxcvbnm", "1234567890"];
+export const SAMPLE_PASSWORDS = ["{95745@F_S_d", "_DQYU_@2789", "Lm3!Xe4r"];
