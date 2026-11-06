@@ -6,7 +6,7 @@ import React, { StrictMode } from 'react';
 import {
   APP_INIT_ERROR, APP_READY, initialize, mergeConfig, subscribe,
 } from '@edx/frontend-platform';
-import { ErrorPage } from '@edx/frontend-platform/react';
+import { ErrorPage } from '@edx/frontend-platform/react'; 
 import { createRoot } from 'react-dom/client';
 
 import configuration from './config';
